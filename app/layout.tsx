@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { RootProvider } from "react-day-picker";
 import RootProviders from "@/components/providers/RootProviders";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark relative flex h-screen w-full flex-col" style={{colorScheme: "dark",}}>
+      <Navbar/>
       <body className={inter.className}><RootProviders>{children}</RootProviders></body>
+
     </html>
   );
 }
