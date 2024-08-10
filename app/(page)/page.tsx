@@ -1,5 +1,6 @@
 
 import { DatePicker } from '@/components/DatePicker'
+import { Button } from '@/components/ui/button'
 import React from 'react'
 
 function page() {
@@ -8,6 +9,9 @@ function page() {
         <div className="border-b bg-card">
             <div className="container flex flex-wrap items-center justify-between gap-6 py-8">
                 <DatePicker/>
+                <Button variant={"outline"} className='border-violet-500 bg-violet-950 text-white hover:bg-violet-700 hover:text-white'>
+                Calculate your remaining lifetime
+                </Button>
             </div>
         </div>
     </div>
