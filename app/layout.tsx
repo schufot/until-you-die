@@ -18,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark relative flex h-screen w-full flex-col" style={{colorScheme: "dark",}}>
-      <Navbar/>
+    <html lang="en" className="dark" style={{colorScheme: "dark",}}>
+
       <body className={inter.className}><RootProviders>{children}</RootProviders></body>
 
     </html>
