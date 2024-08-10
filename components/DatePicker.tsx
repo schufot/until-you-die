@@ -55,7 +55,6 @@ export function DatePicker() {
           name="dob"
           render={({ field }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>Date of birth</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
@@ -69,7 +68,7 @@ export function DatePicker() {
                       {field.value ? (
                         format(field.value, "PPP")
                       ) : (
-                        <span>Pick a date</span>
+                        <span>Date of birth</span>
                       )}
                       <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
@@ -91,9 +90,7 @@ export function DatePicker() {
             </FormItem>
           )}
         />
-        <Button variant={"outline"} className='border-violet-500 bg-violet-950 text-white hover:bg-violet-700 hover:text-white'>
-                Calculate your remaining lifetime
-                </Button>
+        
       </form>
     </Form>
   )

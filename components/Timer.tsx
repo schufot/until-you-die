@@ -13,7 +13,7 @@ function Timer() {
 
     useEffect(() => {
 
-        const target = new Date("12/30/2030 18:00:00"); // Daten vom statistischen Bundesamt bzw. Todestag
+        const target = new Date("08/10/2024 23:00:00"); // Daten vom statistischen Bundesamt bzw. Todestag
         const interval = setInterval(() => {
             const now = new Date() // Birthdate vom User
             const difference = target.getTime() - now.getTime();
@@ -45,7 +45,7 @@ function Timer() {
     }, [])
 
   return (
-    <div>Years: {years} Months: {months} Weeks: {weeks} Days: {days} Hours: {hours} Minutes: {minutes} Seconds: {seconds}</div>
+    <div>Statistically speaking you have {years} years {months} months {weeks} weeks {days} days {hours} hours {minutes} minutes and {seconds} seconds to live.</div>
   )
 }
 
