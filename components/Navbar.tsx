@@ -1,5 +1,6 @@
 import React from 'react'
 import Logo from './Logo';
+import { ThemeSwitcherButton } from './ThemeSwitcherButton';
 
 function Navbar() {
   return (<>
@@ -14,6 +15,9 @@ function DesktopNavbar(){
             <nav className="container flex items-center justify-between px-8">
                 <div className="flex h-[80px] min-h-[60px] items-center gap-x-4" >
                     <Logo/>
+                </div>
+                <div className="flex items-center gap-2">
+                    <ThemeSwitcherButton/>
                 </div>
             </nav>
         </div>
