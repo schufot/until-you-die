@@ -13,7 +13,7 @@ function Timer() {
 
     useEffect(() => {
 
-        const target = new Date("08/10/2024 23:00:00"); // Daten vom statistischen Bundesamt bzw. Todestag
+        const target = new Date("08/12/2024 20:00:00"); // Daten vom statistischen Bundesamt bzw. Todestag
         const interval = setInterval(() => {
             const now = new Date() // Birthdate vom User
             const difference = target.getTime() - now.getTime();
@@ -30,7 +30,7 @@ function Timer() {
             const d = Math.floor((difference % 604800000) / 86400000);
             setDays(d);
 
-            const h = Math.floor((difference % 86400000) / 3600000) -1;
+            const h = Math.floor((difference % 86400000) / 3600000);
             setHours(h);
 
             const mi = Math.floor((difference % 3600000) / 60000);
