@@ -46,6 +46,8 @@ export function Combobox() {
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
 
+
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -61,11 +63,11 @@ export function Combobox() {
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent>
         <Command>
           <CommandInput placeholder="Search birthplace..." />
           <CommandList>
-            <CommandEmpty>No framework found.</CommandEmpty>
+            <CommandEmpty>No birthplace found.</CommandEmpty>
             <CommandGroup>
               {birthplaces.map((birthplace) => (
                 <CommandItem
@@ -85,6 +87,7 @@ export function Combobox() {
                   {birthplace.label}
                 </CommandItem>
               ))}
+              
             </CommandGroup>
           </CommandList>
         </Command>

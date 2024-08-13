@@ -24,6 +24,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { toast } from "@/components/ui/use-toast"
+import React from "react"
 
 const FormSchema = z.object({
   dob: z.date({
@@ -85,12 +86,13 @@ export function DatePicker() {
                     initialFocus
                   />
                 </PopoverContent>
+                
               </Popover>
+              
               <FormMessage />
             </FormItem>
           )}
         />
-        
       </form>
     </Form>
   )
