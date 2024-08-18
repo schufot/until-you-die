@@ -1,37 +1,50 @@
 import { Combobox } from "@/components/Combobox";
+import { DatePicker } from "@/components/DatePicker";
 import Timer from "@/components/Timer";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { Form } from "@/components/ui/form";
+import { Form, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { UntilYouDieSchema, type UntilYouDieForm } from ".";
-import { DatePicker } from "@/components/DatePicker";
+import {
+  UntilYouDieSchema,
+  type UntilYouDieForm,
+  useUntilYouDieStore,
+} from ".";
+
+const birthPlaceOptions = [
+  { value: "Africa", label: "Africa" },
+  { value: "America", label: "America" },
+  { value: "Asia", label: "Asia" },
+  { value: "Europe", label: "Europe" },
+  { value: "Oceania", label: "Oceania" },
+];
 
 interface UntilYouDieFormProps extends React.HTMLAttributes<HTMLFormElement> {
-  onSubmitAction: (data: UntilYouDieForm) => Promise<void>;
   formId?: string;
 }
 
 export function UntilYouDieForm({
   className,
-  onSubmitAction,
   formId = "until-you-die-form",
 }: UntilYouDieFormProps) {
-  const form = useForm({
+  const setData = useUntilYouDieStore((state) => state.setData);
+  const form = useForm<UntilYouDieForm>({
     resolver: zodResolver(UntilYouDieSchema),
-    defaultValues: {},
+    defaultValues: {
+      birthDate: undefined,
+      birthPlace: undefined,
+    },
   });
 
   const { isDirty } = form.formState;
 
   const onSubmit = async (data: UntilYouDieForm) => {
-    console.log("Form submitted");
+    console.log("Form submitted", data);
     try {
-      console.log(data);
-      toast.success("Calculation successfull.");
+      setData(data);
+      toast.success("Calculation successful.");
     } catch (error) {
       console.error("Error calculating.", error);
       toast.error("Error calculating.");
@@ -45,8 +58,26 @@ export function UntilYouDieForm({
         onSubmit={form.handleSubmit(onSubmit)}
         className={cn("space-y-4", className)}
       >
-        <DatePicker />
-        <Combobox></Combobox>
+        <FormField
+          control={form.control}
+          name="birthDate"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Date of Birth</FormLabel>
+              <DatePicker field={field} />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="birthPlace"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Place of Birth</FormLabel>
+              <Combobox field={field} options={birthPlaceOptions} />
+            </FormItem>
+          )}
+        />
         <Button
           form={formId}
           type="submit"

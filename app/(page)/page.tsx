@@ -9,16 +9,14 @@ import { UntilYouDieForm } from "../until-you-die-form";
 
 function page() {
   return (
-    <form>
-      <div className="h-full bg-background">
-        <div className="border-b bg-card">
-          <div className="container flex flex-wrap items-center justify-between gap-6 py-8">
-            <UntilYouDieForm />
-            <p className=""></p>
-          </div>
+    <div className="h-full bg-background">
+      <div className="border-b bg-card">
+        <div className="container flex flex-wrap items-center justify-between gap-6 py-8">
+          <UntilYouDieForm />
+          <p className=""></p>
         </div>
       </div>
-    </form>
+    </div>
   );
 }
 

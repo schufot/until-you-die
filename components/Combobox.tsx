@@ -1,52 +1,37 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Check, ChevronsUpDown } from "lucide-react"
-
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import * as React from "react";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList,
-} from "@/components/ui/command"
+} from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/ui/popover";
+import { ControllerRenderProps } from "react-hook-form";
 
-const birthplaces = [
-  {
-    value: "africa",
-    label: "Africa",
-  },
-  {
-    value: "america",
-    label: "America",
-  },
-  {
-    value: "asia",
-    label: "Asia",
-  },
-  {
-    value: "europe",
-    label: "Europe",
-  },
-  {
-    value: "oceania",
-    label: "Oceania",
-  },
-]
+interface ComboboxProps {
+  field: ControllerRenderProps<any, "birthPlace">;
+  options?: { value: string; label: string }[];
+}
 
-export function Combobox() {
-  const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
+export function Combobox({ field, options = [] }: ComboboxProps) {
+  const [open, setOpen] = React.useState(false);
 
+  console.log("Combobox render - field:", field, "options:", options);
 
+  if (!Array.isArray(options)) {
+    console.error("Options is not an array:", options);
+    return <div>Error: Invalid options</div>;
+  }
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -57,41 +42,40 @@ export function Combobox() {
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {value
-            ? birthplaces.find((birthplace) => birthplace.value === value)?.label
+          {field.value
+            ? options.find((option) => option.value === field.value)?.label ||
+              "Unknown"
             : "Select birthplace..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent>
+      <PopoverContent className="w-[200px] p-0">
         <Command>
           <CommandInput placeholder="Search birthplace..." />
-          <CommandList>
-            <CommandEmpty>No birthplace found.</CommandEmpty>
-            <CommandGroup>
-              {birthplaces.map((birthplace) => (
-                <CommandItem
-                  key={birthplace.value}
-                  value={birthplace.value}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
-                    setOpen(false)
-                  }}
-                >
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      value === birthplace.value ? "opacity-100" : "opacity-0"
-                    )}
-                  />
-                  {birthplace.label}
-                </CommandItem>
-              ))}
-              
-            </CommandGroup>
-          </CommandList>
+          <CommandEmpty>No birthplace found.</CommandEmpty>
+          <CommandGroup>
+            {options.map((option) => (
+              <CommandItem
+                key={option.value}
+                onSelect={(currentValue) => {
+                  field.onChange(
+                    currentValue === field.value ? "" : currentValue
+                  );
+                  setOpen(false);
+                }}
+              >
+                <Check
+                  className={cn(
+                    "mr-2 h-4 w-4",
+                    field.value === option.value ? "opacity-100" : "opacity-0"
+                  )}
+                />
+                {option.label}
+              </CommandItem>
+            ))}
+          </CommandGroup>
         </Command>
       </PopoverContent>
     </Popover>
-  )
+  );
 }

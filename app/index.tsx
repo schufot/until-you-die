@@ -1,21 +1,19 @@
-import { UntilYouDieForm } from "./until-you-die-form";
 import { z } from "zod";
-import {create} from "zustand";
-
-type UntilYouDieStore = {
-    data: UntilYouDieForm;
-    setData: (data: UntilYouDieStore["data"]) => void;
-};
-
-export const useUntilYouDieStore = create<UntilYouDieStore>((set) => ({
-    data:{
-
-    },
-    setData: (data) => set({data}),
-}));
+import { create } from "zustand";
 
 export const UntilYouDieSchema = z.object({
-    
+  birthDate: z.date(),
+  birthPlace: z.enum(["Africa", "America", "Asia", "Europe", "Oceania"]),
 });
 
 export type UntilYouDieForm = z.infer<typeof UntilYouDieSchema>;
+
+type UntilYouDieStore = {
+  data: UntilYouDieForm | null;
+  setData: (data: UntilYouDieForm) => void;
+};
+
+export const useUntilYouDieStore = create<UntilYouDieStore>((set) => ({
+  data: null,
+  setData: (data) => set({ data }),
+}));
