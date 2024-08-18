@@ -1,6 +1,6 @@
 "use client";
 
-import { useUntilYouDieStore } from "@/app";
+import { useUntilYouDieStore } from "@/app/store";
 import React, { useEffect, useState } from "react";
 
 function Timer() {

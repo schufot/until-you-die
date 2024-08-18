@@ -11,7 +11,7 @@ import {
   UntilYouDieSchema,
   type UntilYouDieForm,
   useUntilYouDieStore,
-} from ".";
+} from "../store";
 
 const birthPlaceOptions = [
   { value: "Africa", label: "Africa" },
