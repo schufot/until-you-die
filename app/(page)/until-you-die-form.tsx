@@ -11,7 +11,6 @@ import {
   type UntilYouDieForm,
   useUntilYouDieStore,
 } from "../store";
-import { Combobox } from "@/components/Combobox";
 import {
   Select,
   SelectContent,
@@ -70,7 +69,9 @@ export function UntilYouDieForm({
           name="birthDate"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Date of Birth</FormLabel>
+              <div className="">
+                <FormLabel>Date of Birth</FormLabel>
+              </div>
               <DatePicker field={field} />
             </FormItem>
           )}
