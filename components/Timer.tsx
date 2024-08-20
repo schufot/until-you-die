@@ -77,14 +77,6 @@ function Timer() {
     return () => clearInterval(interval);
   }, [data]);
 
-  if (!data) {
-    return (
-      <div>
-        Please enter your birth date and place to see your remaining lifetime.
-      </div>
-    );
-  }
-
   return (
     <div>
       Statistically speaking you have {years} years {months} months {weeks}{" "}

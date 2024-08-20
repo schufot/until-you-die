@@ -1,4 +1,3 @@
-import { Combobox } from "@/components/Combobox";
 import { DatePicker } from "@/components/DatePicker";
 import Timer from "@/components/Timer";
 import { Button } from "@/components/ui/button";
@@ -12,6 +11,14 @@ import {
   type UntilYouDieForm,
   useUntilYouDieStore,
 } from "../store";
+import { Combobox } from "@/components/Combobox";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const birthPlaceOptions = [
   { value: "Africa", label: "Africa" },
@@ -74,7 +81,18 @@ export function UntilYouDieForm({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Place of Birth</FormLabel>
-              <Combobox field={field} options={birthPlaceOptions} />
+              <Select onValueChange={field.onChange}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select birthplace..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Africa">Africa</SelectItem>
+                  <SelectItem value="America">America</SelectItem>
+                  <SelectItem value="Asia">Asia</SelectItem>
+                  <SelectItem value="Europe">Europe</SelectItem>
+                  <SelectItem value="Oceania">Oceania</SelectItem>
+                </SelectContent>
+              </Select>
             </FormItem>
           )}
         />
