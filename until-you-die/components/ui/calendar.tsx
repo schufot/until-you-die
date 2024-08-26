@@ -63,23 +63,25 @@ function Calendar({
           const { fromDate, fromMonth, fromYear, toDate, toMonth, toYear } =
             useDayPicker();
 
-            const {goToMonth, currentMonth} = useNavigation();
+          const { goToMonth, currentMonth } = useNavigation();
           if (props.name === "months") {
             const selectItems = Array.from({ length: 12 }, (_, i) => ({
               value: i.toString(),
               label: format(setMonth(new Date(), i), "MMM"),
             }));
             return (
-              <Select value={props.value?.toString()} onValueChange={(newValue) => {
-                const newDate = new Date(currentMonth);
-                newDate.setMonth(parseInt(newValue));
-                goToMonth(newDate);
-                
-              }} >
+              <Select
+                value={props.value?.toString()}
+                onValueChange={(newValue) => {
+                  const newDate = new Date(currentMonth);
+                  newDate.setMonth(parseInt(newValue));
+                  goToMonth(newDate);
+                }}
+              >
                 <SelectTrigger>{format(currentMonth, "MMM")}</SelectTrigger>
                 <SelectContent>
                   {selectItems.map((selectItem) => (
-                    <SelectItem value={selectItem.value}>
+                    <SelectItem value={selectItem.value} key="">
                       {selectItem.label}
                     </SelectItem>
                   ))}
@@ -100,16 +102,18 @@ function Calendar({
               }));
             }
             return (
-              <Select onValueChange={(newValue) => {
-                const newDate = new Date(currentMonth);
-                newDate.setFullYear(parseInt(newValue));
-                goToMonth(newDate);
-                
-              }} value={props.value?.toString()}>
+              <Select
+                onValueChange={(newValue) => {
+                  const newDate = new Date(currentMonth);
+                  newDate.setFullYear(parseInt(newValue));
+                  goToMonth(newDate);
+                }}
+                value={props.value?.toString()}
+              >
                 <SelectTrigger>{currentMonth.getFullYear()}</SelectTrigger>
                 <SelectContent>
                   {selectItems.map((selectItem) => (
-                    <SelectItem value={selectItem.value}>
+                    <SelectItem value={selectItem.value} key="">
                       {selectItem.label}
                     </SelectItem>
                   ))}
