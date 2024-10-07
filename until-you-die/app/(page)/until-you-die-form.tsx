@@ -18,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import WeeksTable from "@/components/WeeksTable";
 
 const birthPlaceOptions = [
   { value: "Africa", label: "Africa" },
@@ -107,6 +108,7 @@ export function UntilYouDieForm({
           Calculate your remaining lifetime
         </Button>
         <Timer />
+        <WeeksTable />
       </form>
     </Form>
   );
