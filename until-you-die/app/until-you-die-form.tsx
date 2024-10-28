@@ -3,14 +3,13 @@ import Timer from "@/components/Timer";
 import { Button } from "@/components/ui/button";
 import { Form, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import {
   UntilYouDieSchema,
   type UntilYouDieForm,
   useUntilYouDieStore,
-} from "../store";
+} from "./store";
 import {
   Select,
   SelectContent,
@@ -19,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import WeeksTable from "@/components/WeeksTable";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const birthPlaceOptions = [
   { value: "Africa", label: "Africa" },

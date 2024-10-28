@@ -1,10 +1,10 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
-import { UntilYouDieForm } from "./until-you-die-form";
 import { Separator } from "@/components/ui/separator";
+import { UntilYouDieForm } from "./until-you-die-form";
 
-function page() {
+function Page() {
   return (
     <div className="relative flex h-screen w-full flex-col">
       <Navbar />
@@ -22,4 +22,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

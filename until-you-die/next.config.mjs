@@ -4,7 +4,7 @@ const nextConfig = {
     images: {
       unoptimized: true,
     },
-    basePath: '/until-you-die',
+    basePath: process.env.NODE_ENV === 'production' ? '/until-you-die' : '',
   };
   
   export default nextConfig;
