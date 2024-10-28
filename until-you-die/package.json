@@ -2,11 +2,14 @@
   "name": "until-you-die",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://schufot.github.io/until-you-die",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "gh-pages -d out",
+    "predeploy": "npm run build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
