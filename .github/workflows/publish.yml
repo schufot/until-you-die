@@ -33,7 +33,7 @@ jobs:
         run: npx next build
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact
+        uses: actions/upload-pages-artifact@v4
         with:
           name: github-pages
           path: |
