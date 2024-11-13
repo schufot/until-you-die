@@ -79,9 +79,15 @@ function Timer() {
 
   return (
     <div>
-      Statistically speaking you have {years} years {months} months {weeks}{" "}
-      weeks {days} days {hours} hours {minutes} minutes and {seconds} seconds to
-      live.
+      <p className="mb-4">
+        Statistically speaking you have {years} years {months} months {weeks}{" "}
+        weeks {days} days {hours} hours {minutes} minutes and {seconds} seconds
+        to live.
+      </p>
+      <p>
+        Each square represents one week of your life. You have already lived the
+        colorful ones, the others you still have to live.
+      </p>
     </div>
   );
 }
