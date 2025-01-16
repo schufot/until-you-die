@@ -1,4 +1,4 @@
-// File: /home/thea/Dokumente/GitHub/until-you-die/app/layout.tsx
+// File: /home/thea/Dokumente/github/until-you-die/app/layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
