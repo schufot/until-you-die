@@ -1,15 +1,38 @@
 import { useUntilYouDieStore } from "@/app/store";
 import React, { useState, useEffect } from "react";
 const WEEKS_IN_YEAR = 52;
-const YEARS_TO_SHOW = 90;
 
 function WeeksTable() {
   const [birthDate, setBirthDate] = useState<Date | null>(null);
+  const [lifeExpectancy, setLifeExpectancy] = useState<number>(0);
   const { data } = useUntilYouDieStore();
 
   useEffect(() => {
     if (data?.birthDate) {
       setBirthDate(new Date(data.birthDate));
+    }
+    if (data?.birthPlace) {
+      let expectancy = 0;
+      switch (data.birthPlace) {
+        case "Africa":
+          expectancy = 63;
+          break;
+        case "America":
+          expectancy = 74;
+          break;
+        case "Asia":
+          expectancy = 73;
+          break;
+        case "Europe":
+          expectancy = 79;
+          break;
+        case "Oceania":
+          expectancy = 74;
+          break;
+        default:
+          expectancy = 0;
+      }
+      setLifeExpectancy(expectancy);
     }
   }, [data]);
 
@@ -21,6 +44,7 @@ function WeeksTable() {
   };
 
   const weeksSinceBirth = birthDate ? getWeeksSinceBirth(birthDate) : 0;
+  const yearsToShow = lifeExpectancy;
 
   return (
     <div className="p-4 w-full overflow-x-auto">
@@ -44,7 +68,7 @@ function WeeksTable() {
         {" "}
         {/* Minimum width to ensure proper display */}
         <div className="flex flex-col justify-between pr-2 w-12">
-          {Array.from({ length: YEARS_TO_SHOW / 5 + 1 }, (_, i) => (
+          {Array.from({ length: yearsToShow / 5 + 1 }, (_, i) => (
             <span
               key={i}
               className="text-xs text-right h-[26px] flex items-center justify-end"
@@ -54,7 +78,7 @@ function WeeksTable() {
           ))}
         </div>
         <div className="flex-1 grid grid-cols-[repeat(52,_minmax(0,_1fr))] gap-1">
-          {Array.from({ length: YEARS_TO_SHOW * WEEKS_IN_YEAR }, (_, index) => {
+          {Array.from({ length: yearsToShow * WEEKS_IN_YEAR }, (_, index) => {
             const isLived = index < weeksSinceBirth;
             return (
               <div
