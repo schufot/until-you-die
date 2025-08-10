@@ -60,7 +60,7 @@ export default function WeeksTable() {
   }, [birthDate, expectancyYears]);
 
   return (
-    <div className="p-4 w-full overflow-x-auto">
+    <div id="weeks-grid" className="p-4 w-full overflow-x-auto">
       <div className="flex min-w-[1300px]">
         <div className="w-12" />
         <div className="flex-1 ml-1">
@@ -75,6 +75,7 @@ export default function WeeksTable() {
           </div>
         </div>
       </div>
+
       <div className="flex min-w-[1300px]">
         <div className="flex flex-col justify-between pr-2 w-12">
           {ticks.map((t, i) => (

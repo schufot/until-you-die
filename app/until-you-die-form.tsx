@@ -1,3 +1,5 @@
+"use client";
+
 import { DatePicker } from "@/components/DatePicker";
 import Timer from "@/components/Timer";
 import { Button } from "@/components/ui/button";
@@ -58,6 +60,51 @@ export function UntilYouDieForm({
     }
   };
 
+  const exportToPdf = async () => {
+    const html2canvas = (await import("html2canvas")).default;
+    const { jsPDF } = await import("jspdf");
+
+    const el = document.getElementById("weeks-grid");
+    if (!el) {
+      toast.error("Grid not found.");
+      return;
+    }
+
+    const canvas = await html2canvas(el, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: "#ffffff",
+    });
+
+    const imgData = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF({
+      orientation: "landscape",
+      unit: "mm",
+      format: "a4",
+    });
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    const imgWidth = pageWidth;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    let heightLeft = imgHeight;
+    let position = 0;
+
+    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+
+    while (heightLeft > 0) {
+      position = -(imgHeight - heightLeft);
+      pdf.addPage();
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+    }
+
+    pdf.save("until-you-die-weeks.pdf");
+  };
+
   return (
     <Form {...form}>
       <form
@@ -70,9 +117,7 @@ export function UntilYouDieForm({
           name="birthDate"
           render={({ field }) => (
             <FormItem>
-              <div className="">
-                <FormLabel>Date of Birth</FormLabel>
-              </div>
+              <FormLabel>Date of Birth</FormLabel>
               <DatePicker field={field} />
             </FormItem>
           )}
@@ -88,11 +133,11 @@ export function UntilYouDieForm({
                   <SelectValue placeholder="Select birthplace..." />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Africa">Africa</SelectItem>
-                  <SelectItem value="America">America</SelectItem>
-                  <SelectItem value="Asia">Asia</SelectItem>
-                  <SelectItem value="Europe">Europe</SelectItem>
-                  <SelectItem value="Oceania">Oceania</SelectItem>
+                  {birthPlaceOptions.map((opt) => (
+                    <SelectItem key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </FormItem>
@@ -102,13 +147,24 @@ export function UntilYouDieForm({
           form={formId}
           type="submit"
           disabled={!isDirty}
-          variant={"outline"}
+          variant="outline"
           className="border-violet-500 bg-violet-950 text-white hover:bg-violet-700 hover:text-white"
         >
           Calculate your remaining lifetime
         </Button>
+
         <Timer />
+
         <WeeksTable />
+
+        <Button
+          type="button"
+          onClick={exportToPdf}
+          variant="outline"
+          className="mt-4 border-violet-500 bg-violet-950 text-white hover:bg-violet-700 hover:text-white"
+        >
+          Export as PDF
+        </Button>
       </form>
     </Form>
   );
