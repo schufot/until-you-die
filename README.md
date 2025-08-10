@@ -1,5 +1,7 @@
 # Until you die
 
+https://schufot.github.io/until-you-die/
+
 A timer for your remaining life-span based on your birthday and birthplace.
 
 ## Technologies Used
