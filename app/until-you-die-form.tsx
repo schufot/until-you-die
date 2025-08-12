@@ -86,21 +86,17 @@ export function UntilYouDieForm({
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
 
-    const imgWidth = pageWidth;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    const ratio = Math.min(
+      pageWidth / canvas.width,
+      pageHeight / canvas.height
+    );
+    const imgWidth = canvas.width * ratio;
+    const imgHeight = canvas.height * ratio;
 
-    let heightLeft = imgHeight;
-    let position = 0;
+    const x = (pageWidth - imgWidth) / 2;
+    const y = (pageHeight - imgHeight) / 2;
 
-    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
-
-    while (heightLeft > 0) {
-      position = -(imgHeight - heightLeft);
-      pdf.addPage();
-      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-    }
+    pdf.addImage(imgData, "PNG", x, y, imgWidth, imgHeight);
 
     pdf.save("until-you-die-weeks.pdf");
   };
