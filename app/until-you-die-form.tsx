@@ -79,26 +79,30 @@ export function UntilYouDieForm({
     const imgData = canvas.toDataURL("image/png");
 
     const pdf = new jsPDF({
-      orientation: "landscape",
+      orientation: "portrait",
       unit: "mm",
       format: "a4",
     });
+
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
 
     const ratio = Math.min(
       pageWidth / canvas.width,
-      pageHeight / canvas.height
+      (pageHeight - 20) / canvas.height
     );
     const imgWidth = canvas.width * ratio;
     const imgHeight = canvas.height * ratio;
 
     const x = (pageWidth - imgWidth) / 2;
-    const y = (pageHeight - imgHeight) / 2;
+    const y = 15;
+
+    pdf.setFontSize(18);
+    pdf.setTextColor(40);
+    pdf.text("Life Calendar", pageWidth / 2, 12, { align: "center" });
 
     pdf.addImage(imgData, "PNG", x, y, imgWidth, imgHeight);
-
-    pdf.save("until-you-die-weeks.pdf");
+    pdf.save("life-calendar.pdf");
   };
 
   return (
