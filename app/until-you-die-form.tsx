@@ -116,8 +116,8 @@ export function UntilYouDieForm({
           control={form.control}
           name="birthDate"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Date of Birth</FormLabel>
+            <FormItem className="flex flex-col items-start">
+              <FormLabel className="mb-1">Date of Birth</FormLabel>
               <DatePicker field={field} />
             </FormItem>
           )}
