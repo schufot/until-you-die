@@ -12,11 +12,6 @@ A timer for your remaining life-span based on your birthday and birthplace.
 
 ## Screenrecording
 
-https://github.com/user-attachments/assets/40b46ce9-b1df-48a1-a425-315813b671ff
-
-
-https://github.com/user-attachments/assets/48358074-23e5-4918-9952-fdd6d8c45d67
-
 
 
 ## Screenshots
